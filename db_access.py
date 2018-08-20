@@ -168,6 +168,7 @@ def delete_user(user_id):
 
 
 def save_html_content(w_id, content):
+    print(content)
     try:
         html = session.query(HtmlContent).filter_by(website_id=w_id).first()
         if html:

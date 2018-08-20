@@ -12,6 +12,16 @@
 
 #### 环境准备
 系统需安装MySQL和Redis数据库以及Python3.
+
+MySql须使用版本5.7 
+````bash
+brew install mysql@5.7
+````
+有可能需要重新添加到`$PATH`
+
+如果不小心默认安装了高版本的MySql导致`mysqld`出错, 可参考[StackOverflow](https://apple.stackexchange.com/questions/328439/brew-install-mysql5-7-results-in-missing-mysql-bin)
+
+
 建议安装Python3虚拟环境之后运行。
 
 安装依赖包
@@ -26,9 +36,12 @@ pip install -r requirements.txt
 创建MySQL数据库
 
 连接MySQL，执行
+
 ```
+mysql> create user 'YOUR_USER_NAME'@'localhost';
 mysql> create database news_feed default charset utf8;
 ```
+然后在`config.py`里面修改对应的用户名
 
 创建表
 ```
@@ -119,6 +132,14 @@ python mail_bot.py
 ```
 cd utils/ ; python send_email.py
 ```
+
+#### Current progress 
+The conda env used is `source activate newsfeed`
+Running `python info_engine.py` getting into some problems about the encoding
+The error shows that 
+````shell
+[2018-08-20 13:04:41,201: WARNING/ForkPoolWorker-11] [ERROR] 2018-08-20 13:04:41  'ascii' codec can't encode characters in position 0-9: ordinal not in range(128)
+````
 
 
 

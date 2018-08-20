@@ -1,5 +1,4 @@
-# --*-- coding: utf-8 --*--
-
+#coding=utf-8
 import os
 import sys
 
@@ -31,7 +30,6 @@ def extract(w_id):
     try:
         w = get_website(w_id)
         # log(NOTICE, "开始 #{id} {name} {site} ".format(id=w.id, name=w.company.name_cn, site=w.url))
-
         new_html_content = crawl(w.url)
         if not new_html_content:
             log(NOTICE, "#{id} {name} {site} 抓到更新 0 条".format(id=w.company.id, name=w.company.name_cn, site=w.url))
@@ -57,7 +55,7 @@ def extract(w_id):
         if items:
             for a in items:
                 if a.string:
-                    url, text = a.get('href'), a.string
+                    url, text = a.get('href'), a.string.encode('utf-8')
                     check_pass = check_content(url, text)
                     if check_pass:
                         url = complement_url(url, w.url)
@@ -84,10 +82,6 @@ def gen_info():
     for w in websites[:]:
         if (w.url not in blacklist_site) and (w.company.name_cn not in blacklist_company):
             extract.delay(w.id)
-
-
-
-
 
 
 if __name__ == '__main__':
