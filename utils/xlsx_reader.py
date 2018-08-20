@@ -1,4 +1,4 @@
-# --*-- coding: utf-8 --*--
+#coding=utf-8
 import sys
 import os
 
@@ -11,7 +11,7 @@ from db_access import create_company, create_website
 wb = openpyxl.load_workbook('../docs/swiftwire.xlsx')
 
 def sheet01():
-    sheet = wb.get_sheet_by_name("原有公司")
+    sheet = wb.get_sheet_by_name(u"原有公司")
     for item in sheet.iter_rows(min_row=2, max_col=12, max_row=400):
         if not item[1].value:
             continue
@@ -35,7 +35,7 @@ def sheet01():
 
 
 def sheet02():
-    sheet = wb.get_sheet_by_name("没有重复的公司")
+    sheet = wb.get_sheet_by_name(u"没有重复的公司")
     for item in sheet.iter_rows(min_row=2, max_col=12, max_row=400):
         if not item[1].value:
             continue
@@ -59,7 +59,7 @@ def sheet02():
 
 
 def sheet03():
-    sheet = wb.get_sheet_by_name("新创公司")
+    sheet = wb.get_sheet_by_name(u"新创公司")
     for item in sheet.iter_rows(min_row=3, max_col=12, max_row=400):
         if not item[1].value:
             continue
